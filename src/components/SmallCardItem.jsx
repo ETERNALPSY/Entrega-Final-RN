@@ -55,8 +55,8 @@ const styles = StyleSheet.create({
       fontFamily: 'montserratBold'
    },
    description: {
-      fontSize: 18,
-      fontFamily: 'montserratLight'
+      fontSize: 15,
+      fontFamily: 'montserratLight',
    },
    cart: {
       height: 60,

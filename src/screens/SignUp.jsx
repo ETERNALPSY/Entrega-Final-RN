@@ -1,13 +1,47 @@
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import logo from '../../assets/images/logo.png'
 import InputArea from '../components/InputArea'
 import GreenButton from '../components/GreenButton'
 import { colors } from '../global/colors'
+import { useSignUpMutation } from '../services/authServices'
+import { useDispatch } from 'react-redux'
+import { setUser } from '../features/user/userSlice'
 
 const SignUp = () => {
+
+   const [email, setEmail] = useState('')
+   const [password, setPassword] = useState('')
+   const [confirmPassword, setConfirmPassword] = useState('')
+   const [triggerSingUp, result] = useSignUpMutation()
+   const dispatch = useDispatch()
+
+   useEffect(()=>{
+      if (result.isSuccess) {
+         dispatch(
+            setUser({
+               email: result.data.email,
+               idToken: result.data.idToken
+            })
+         )
+      }
+   },[result])
+
+   const onSubmit = () => {
+      try {
+         const request = {
+            email,
+            password,
+            returnSecureToken: true
+         }
+         triggerSingUp(request)
+      } catch (error) {
+         console.log(error)
+      }
+   }
+
    return (
-      <View style={styles.container}>
+      <View style={styles.container} >
          <View style={styles.logoWrapper}>
             <Image
                style={styles.logo}
@@ -18,12 +52,24 @@ const SignUp = () => {
             <Text style={styles.subtitle}>Un placer recibirte en nuestra comunidad</Text>
          </View>
          <View style={styles.formWrapper}>
-            <InputArea label={'Email'} />
-            <InputArea label={'Contraseña'} />
-            <InputArea label={'Confirmar Contraseña'} />
+            <InputArea
+               label={'Email'}
+               email={email}
+               onChange={setEmail}
+            />
+            <InputArea
+               label={'Contraseña'}
+               password={password}
+               isSecure={true}
+               onChange={setPassword}
+            />
+            <InputArea
+               label={'Confirmar Contraseña'}
+               isSecure={true}
+               onChange={setConfirmPassword}
+            />
          </View>
-         
-            <GreenButton title={'¡Registrarse!'} />
+         <GreenButton onPress={onSubmit} title={'¡Registrarse!'} />
       </View>
    )
 }
@@ -36,7 +82,7 @@ const styles = StyleSheet.create({
       justifyContent: 'space-evenly',
       alignItems: 'center',
       padding: 10,
-      backgroundColor:colors.white
+      backgroundColor: colors.white
    },
    logoWrapper: {
       alignItems: 'center'

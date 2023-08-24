@@ -24,7 +24,7 @@ const Search = () => {
                Keyboard.dismiss()
             }}
          >
-            <Octicons name="search" size={30} color={colors.green} />
+            <Octicons name="search" size={27} color={colors.green} />
          </TouchableOpacity>
       </View>
    )
@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
    input: {
       width: '90%',
       borderRadius: 5,
-      padding: 10,
-      fontSize:25,
+      padding: 7,
+      fontSize:20,
       fontFamily:'montserratBold'
    },
    button: {

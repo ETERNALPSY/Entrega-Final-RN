@@ -2,12 +2,13 @@ import { StyleSheet, Text, View, TextInput } from 'react-native'
 import React, { useState } from 'react'
 import { colors } from '../global/colors'
 
-const InputArea = ({ label, onChange, password, keyboard }) => {
+const InputArea = ({ label, onChange, isSecure }) => {
 
    const [input, setInput] = useState('')
 
    const onChangeText = (text) => {
       setInput(text)
+      onChange(text)
    }
 
    return (
@@ -18,8 +19,7 @@ const InputArea = ({ label, onChange, password, keyboard }) => {
             value={input}
             onChangeText={onChangeText}
             placeholder={label}
-            secureTextEntry={password}
-            keyboardType={keyboard}
+            secureTextEntry={isSecure}
          />
       </View>
    )

@@ -5,12 +5,6 @@ import { colors } from '../global/colors'
 import { Entypo } from '@expo/vector-icons'
 
 const Welcome = ({ navigation }) => {
-   const email = true
-   const handler = () => {
-      email ?
-         navigation.navigate('Default')
-         : navigation.navigate('LogIn')
-   }
 
    return (
       <View style={styles.container}>
@@ -21,7 +15,7 @@ const Welcome = ({ navigation }) => {
             resizeMode='cover'
          />
          <TouchableOpacity
-            onPress={handler}
+            onPress={() => navigation.navigate('LogIn')}
             style={styles.button}
          >
             <Text style={styles.buttonText}>Saborea la Excelencia</Text>

@@ -1,21 +1,24 @@
-import { StyleSheet, SafeAreaView, Platform, Text, StatusBar } from 'react-native'
+import { StyleSheet, SafeAreaView, Platform, StatusBar } from 'react-native'
 import React from 'react'
-import LogIn from '../screens/LogIn'
-import SignUp from '../screens/SignUp'
-import Profile from '../screens/Profile'
-import Welcome from '../screens/Welcome'
 import { NavigationContainer } from '@react-navigation/native'
 import AuthStack from './AuthStack'
 import TabNavigator from './TabNavigator'
+import { useSelector } from 'react-redux'
 
 
 
 const Navigator = () => {
-   const email = true
+   const { email } = useSelector((state) => state.userReducer.value)
+   
    return (
       <SafeAreaView style={styles.container}>
          <NavigationContainer>
-            <AuthStack />
+            {
+               email ?
+               <TabNavigator />
+               :
+               <AuthStack />
+            }
          </NavigationContainer>
       </SafeAreaView>
    )
