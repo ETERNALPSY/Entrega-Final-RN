@@ -1,23 +1,46 @@
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import logo from '../../assets/images/logo.png'
 import InputArea from '../components/InputArea'
 import GreenButton from '../components/GreenButton'
 import { colors } from '../global/colors'
 import { useDispatch } from 'react-redux'
 import { useSignInMutation } from '../services/authServices'
+import { setUser } from '../features/user/userSlice'
 
 const LogIn = ({ navigation }) => {
 
    const [email, setEmail] = useState('')
    const [password, setPassword] = useState('')
    const dispatch = useDispatch()
-   const [triggerSingUp] = useSignInMutation()
+
+   const [triggerSignIn, resultSignIn] = useSignInMutation()
+
+   const onSubmit = () => {
+      triggerSignIn({
+         email,
+         password,
+         returnSecureToken: true,
+      })
+   }
+
+   useEffect(()=>{
+      try {
+         if (resultSignIn.isSuccess){
+            dispatch(setUser({
+               email: resultSignIn.data.email,
+               idToken: resultSignIn.data.idToken
+            }))
+         }
+      } catch (error) {
+         
+      }
+   },[resultSignIn])
 
    const toSignUp = () => {
       navigation.navigate('SignUp')
    }
-   
+
    return (
       <View style={styles.container}>
          <View>
@@ -40,7 +63,7 @@ const LogIn = ({ navigation }) => {
             />
          </View>
          <View style={styles.formWrapper}>
-            <GreenButton title={'Iniciar Sesión'} />
+            <GreenButton onPress={onSubmit} title={'Iniciar Sesión'} />
             <Text style={styles.subtitle}>¿No tienes una cuenta?</Text>
             <GreenButton title={'¡Regístrate!'} onPress={toSignUp} />
          </View>

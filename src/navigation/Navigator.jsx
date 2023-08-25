@@ -8,13 +8,13 @@ import { useSelector } from 'react-redux'
 
 
 const Navigator = () => {
-   const { email } = useSelector((state) => state.userReducer.value)
+   const { idToken } = useSelector((state) => state.userReducer.value)
    
    return (
       <SafeAreaView style={styles.container}>
          <NavigationContainer>
             {
-               email ?
+               idToken ?
                <TabNavigator />
                :
                <AuthStack />
