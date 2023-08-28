@@ -25,8 +25,8 @@ const styles = StyleSheet.create({
    },
    text: {
       textAlign: 'center',
-      fontSize: 25,
       color: colors.white,
-      fontFamily: 'montserratBold'
+      fontFamily: 'montserratBold',
+      fontSize:25
    }
 })

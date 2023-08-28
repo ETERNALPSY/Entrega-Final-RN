@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, TouchableOpacity, View, Keyboard } from 'react-native'
+import { StyleSheet, TextInput, TouchableOpacity, View, Keyboard } from 'react-native'
 import React, { useState } from 'react'
 import { Octicons } from '@expo/vector-icons';
 import { colors } from '../global/colors';

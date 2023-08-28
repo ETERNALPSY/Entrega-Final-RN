@@ -1,11 +1,10 @@
-import { StyleSheet } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 //icons
 import { Octicons, FontAwesome5 } from '@expo/vector-icons';
 import { colors } from '../global/colors';
 import Home from '../screens/Home';
-import Profile from '../screens/Profile';
+import ProfileStack from './ProfileStack';
 
 const Tab = createBottomTabNavigator()
 
@@ -29,8 +28,8 @@ const TabNavigator = () => {
             }}
          />
          <Tab.Screen
-            name='Profile'
-            component={Profile}
+            name='ProfileStack'
+            component={ProfileStack}
             options={{
                tabBarIcon: ({ focused }) => {
                   return (
@@ -44,5 +43,3 @@ const TabNavigator = () => {
 }
 
 export default TabNavigator
-
-const styles = StyleSheet.create({})

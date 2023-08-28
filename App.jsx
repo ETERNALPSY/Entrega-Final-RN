@@ -9,7 +9,7 @@ import { Provider } from 'react-redux'
 export default function App() {
 
    const [fontsLoaded] = useFonts({
-      'poppins': require('./assets/poppins/Poppins-SemiBold.ttf'),
+      'poppins': require('./assets/poppins/Poppins-Regular.ttf'),
       'montserratLight': require('./assets/montserrat/Montserrat-Light.ttf'),
       'montserratBold': require('./assets/montserrat/Montserrat-SemiBold.ttf')
    })

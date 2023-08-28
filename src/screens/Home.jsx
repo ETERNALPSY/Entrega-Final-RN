@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { FlatList, Keyboard, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { colors } from '../global/colors'
 import Search from '../components/Search'
@@ -21,6 +21,7 @@ const Home = ({ navigation }) => {
             style={styles.flatList}
             contentContainerStyle={{gap:10}}
             showsVerticalScrollIndicator={false}
+            onScrollToTop={Keyboard.dismiss()}
          />
       </View>
    )

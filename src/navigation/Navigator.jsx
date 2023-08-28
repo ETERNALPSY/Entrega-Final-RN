@@ -4,18 +4,20 @@ import { NavigationContainer } from '@react-navigation/native'
 import AuthStack from './AuthStack'
 import TabNavigator from './TabNavigator'
 import { useSelector } from 'react-redux'
+import ItemDetail from '../screens/ItemDetail'
 
 
 
 const Navigator = () => {
-   const { idToken } = useSelector((state) => state.userReducer.value)
-   
+   //const { idToken } = useSelector((state) => state.userReducer.value)
+   idToken = true
    return (
       <SafeAreaView style={styles.container}>
          <NavigationContainer>
             {
                idToken ?
-               <TabNavigator />
+               <ItemDetail />
+               //<TabNavigator />
                :
                <AuthStack />
             }

@@ -5,7 +5,7 @@ import { colors } from '../global/colors'
 const SmallCardItem = ({ item, navigation }) => {
    return (
       <Pressable style={styles.container}>
-         <View style={styles.imgContainer}>
+         <View style={styles.imgWrapper}>
 
             <Image
                style={styles.img}
@@ -29,12 +29,12 @@ const styles = StyleSheet.create({
    container: {
       width: '100%',
       flexDirection: 'row',
-      backgroundColor: colors.gray,
+      backgroundColor: colors.green,
       gap: 10,
       padding: 10,
       borderRadius: 10
    },
-   imgContainer: {
+   imgWrapper: {
       width: '40%',
       height: 'auto',
       borderRadius: 10,
@@ -48,18 +48,18 @@ const styles = StyleSheet.create({
    },
    title: {
       fontSize: 20,
-      fontFamily: 'poppins'
+      fontFamily: 'poppins',
+      color:colors.white
    },
    price: {
       fontSize: 18,
-      fontFamily: 'montserratBold'
+      fontFamily: 'montserratBold',
+      
+      color:colors.white
    },
    description: {
       fontSize: 15,
       fontFamily: 'montserratLight',
-   },
-   cart: {
-      height: 60,
-      width: 60
+      color:colors.white
    }
 })
