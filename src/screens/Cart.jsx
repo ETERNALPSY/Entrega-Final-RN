@@ -59,5 +59,15 @@ const styles = StyleSheet.create({
       fontFamily:'montserratBold',
       color:'red',
       fontSize:15
+   },
+   totalCost:{
+      fontFamily:'poppins',
+      fontSize:18,
+      fontWeight:'bold'
+   },
+   totalPrice:{
+      fontFamily:'montserratBold',
+      fontSize:20,
+      fontWeight:'bold'
    }
 })
