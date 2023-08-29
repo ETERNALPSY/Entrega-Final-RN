@@ -8,8 +8,6 @@ import { useGetProductsQuery } from '../services/shopServices'
 const Home = ({ navigation }) => {
 
    const { data: products, isLoading, isError, error } = useGetProductsQuery()
-   
-   
 
    return (
       <View style={styles.container}>
@@ -17,7 +15,7 @@ const Home = ({ navigation }) => {
          <FlatList
             data={products}
             keyExtractor={item => item.id}
-            renderItem={({ item }) => <SmallCardItem item={item} navigation={navigation} />}
+            renderItem={({ item }) => <SmallCardItem item={item} navigation={navigation}/>}
             style={styles.flatList}
             contentContainerStyle={{gap:10}}
             showsVerticalScrollIndicator={false}

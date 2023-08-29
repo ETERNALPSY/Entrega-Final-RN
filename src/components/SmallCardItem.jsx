@@ -3,8 +3,13 @@ import React from 'react'
 import { colors } from '../global/colors'
 
 const SmallCardItem = ({ item, navigation }) => {
+
+   const toItemDetail = () => {
+      navigation.navigate('ItemDetail', {itemId: item.id})
+   }
+
    return (
-      <Pressable style={styles.container}>
+      <Pressable style={styles.container} onPress={toItemDetail}>
          <View style={styles.imgWrapper}>
 
             <Image

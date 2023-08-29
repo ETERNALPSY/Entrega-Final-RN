@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux'
 const Profile = ({navigation}) => {
 
    const { profileImage } = useSelector(state => state.userReducer.value)
-   console.log(profileImage)
    
    return (
       <View style={styles.container}>
