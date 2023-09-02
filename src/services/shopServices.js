@@ -5,20 +5,24 @@ export const shopApi = createApi({
    reducerPath: 'shopApi',
    baseQuery: fetchBaseQuery({ baseUrl: realtime_database_url }),
    endpoints: (builder) => ({
+
       getProducts: builder.query({
          query: () => `/products.json`
       }),
+
       getProductById: builder.query({
-         query: (productId) => `products.json?orderBy="id"&equalTo=${productId}`,
-         transformResponse: (response) => {
-            const productTransformed = Object.values(response).pop()
-            return (productTransformed)
-         }
+         query: (productId) => `products/${productId}.json`,
       }),
+
+      postPurchase: builder.mutation({
+         query: (order) => ({
+            url: `orders.json`,
+            method: `POST`,
+            body: order
+         })
+      }),
+
    }),
 })
 
-export const {
-   useGetProductsQuery,
-   useGetProductByIdQuery
-} = shopApi
+export const { useGetProductsQuery, useGetProductByIdQuery, usePostPurchaseMutation } = shopApi

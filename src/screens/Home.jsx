@@ -1,5 +1,5 @@
-import { FlatList, Keyboard, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { FlatList, Keyboard, StyleSheet, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { colors } from '../global/colors'
 import Search from '../components/Search'
 import SmallCardItem from '../components/SmallCardItem'
@@ -7,19 +7,33 @@ import { useGetProductsQuery } from '../services/shopServices'
 
 const Home = ({ navigation }) => {
 
-   const { data: products, isLoading, isError, error } = useGetProductsQuery()
+   const { data: arrayData, isLoading, isError, error } = useGetProductsQuery()
+
+   const [products, setProducts] = useState(undefined)
+
+   const onSearch = (word) => {
+      const searched = arrayData && arrayData.filter(item => 
+         item.name.toLowerCase().includes(word.toLowerCase()) || item.category.toLowerCase().includes(word.toLowerCase())
+      )
+      setProducts(searched)
+   }
+
+   useEffect(() => {
+      if (!products) {
+         setProducts(arrayData)
+      }
+   }, [arrayData, products])
 
    return (
       <View style={styles.container}>
-         <Search />
+         <Search onPress={onSearch} />
          <FlatList
             data={products}
             keyExtractor={item => item.id}
-            renderItem={({ item }) => <SmallCardItem item={item} navigation={navigation}/>}
+            renderItem={({ item }) => <SmallCardItem item={item} navigation={navigation} />}
             style={styles.flatList}
-            contentContainerStyle={{gap:10}}
+            contentContainerStyle={{ gap: 10 }}
             showsVerticalScrollIndicator={false}
-            onScrollToTop={Keyboard.dismiss()}
          />
       </View>
    )

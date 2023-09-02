@@ -16,7 +16,7 @@ const SignUp = () => {
    const [triggerSingUp, result] = useSignUpMutation()
    const dispatch = useDispatch()
 
-   useEffect(()=>{
+   useEffect(() => {
       if (result.isSuccess) {
          dispatch(
             setUser({
@@ -25,7 +25,7 @@ const SignUp = () => {
             })
          )
       }
-   },[result])
+   }, [result])
 
    const onSubmit = () => {
       try {
@@ -48,9 +48,8 @@ const SignUp = () => {
                source={logo}
                resizeMode='cover'
             />
-            <Text style={styles.title}>Regístrate gratis</Text>
-            <Text style={styles.subtitle}>Un placer recibirte en nuestra comunidad</Text>
          </View>
+         <Text style={styles.title}>Regístrate gratis</Text>
          <View style={styles.formWrapper}>
             <InputArea
                label={'Email'}
@@ -69,6 +68,8 @@ const SignUp = () => {
                onChange={setConfirmPassword}
             />
          </View>
+         <Text style={styles.subtitle}>Un placer recibirte en nuestra comunidad</Text>
+
          <GreenButton onPress={onSubmit} title={'¡Registrarse!'} />
       </View>
    )
@@ -79,10 +80,10 @@ export default SignUp
 const styles = StyleSheet.create({
    container: {
       flex: 1,
-      justifyContent: 'center',
+      justifyContent: 'space-around',
       alignItems: 'center',
       padding: 10,
-      gap:10,
+      gap: 10,
       backgroundColor: colors.white
    },
    logoWrapper: {

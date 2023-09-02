@@ -1,42 +1,43 @@
-import { FlatList, Image, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { colors } from '../global/colors'
 import GreenButton from '../components/GreenButton'
-import cart from '../../assets/images/cartIcon.png'
 import { useGetProductByIdQuery } from '../services/shopServices'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../features/cart/cartSlice'
 
 const ItemDetail = ({ navigation, route }) => {
 
    const { itemId } = route.params
-   const { data: item, isLoading, isError, error } = useGetProductByIdQuery(itemId)
+   const { data: item, isLoading, isError, error } = useGetProductByIdQuery(itemId - 1)
+   const dispatch = useDispatch()
 
-
+   const toCart = () => {
+      dispatch(addToCart({
+         ...item,
+         quantity: 1
+      }))
+   }
 
    return (
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
          {
             item &&
             <View style={styles.wrapper}>
-               <Text style={styles.title}>{item.title}</Text>
-               <FlatList
-                  data={item.images}
-                  keyExtractor={item => item}
-                  renderItem={({ item }) => {
-                     return (
-                        <Image
-                           style={{ width: 400, height: 300 }}
-                           source={{ uri: item }}
-                           resizeMode='contain'
-                        />
-                     )
-                  }}
-                  horizontal={true}
-               />
-               <View style={styles.cartWrapper}>
+               <View style={styles.imgWrapper}>
+                  <Image
+                     style={styles.img}
+                     source={{ uri: item.images }}
+                     resizeMode='contain'
+                  />
+               </View>
+               <View style={styles.priceWrapper}>
+                  <Text style={styles.title}>{item.name}</Text>
                   <Text style={styles.price}>${item.price}/Kg</Text>
                </View>
                <Text style={styles.description}>{item.description}</Text>
                <GreenButton
+                  onPress={toCart}
                   title={'Agregar al Carrito'}
                />
             </View>
@@ -57,33 +58,50 @@ const styles = StyleSheet.create({
       paddingHorizontal: 10,
       paddingBottom: 15
    },
-   title: {
-      fontSize: 40,
-      fontFamily: 'poppins'
-   },
    imgWrapper: {
       width: '100%',
       height: 300,
-      backgroundColor: colors.gray,
-
+      backgroundColor: colors.white,
       borderRadius: 10,
    },
    img: {
       flex: 1,
    },
-   cartWrapper: {
+   priceWrapper: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
       width: '100%',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      borderWidth: 1,
+      borderColor: colors.green,
+      borderRadius: 10,
+      overflow: 'hidden'
+   },
+   title: {
+      fontSize: 35,
+      padding: 5,
+      fontFamily: 'poppins',
+      color: colors.white,
+      backgroundColor: colors.green,
+      borderTopRightRadius: 10,
+      borderBottomRightRadius: 10,
+      overflow: 'hidden',
    },
    price: {
-      alignSelf: 'flex-end',
-      fontSize: 35,
-      fontFamily: 'poppins'
+      fontSize: 25,
+      paddingRight: 5,
+      fontFamily: 'montserratBold',
+      color: colors.black,
+      backgroundColor: colors.white,
+      borderRadius: 10,
+      overflow: 'hidden'
    },
    description: {
-      fontSize: 20,
+      fontSize: 21,
       fontFamily: 'poppins',
-      backgroundColor: colors.green,
-      color: colors.white,
+      backgroundColor: colors.yellow,
+      color: colors.black,
       borderRadius: 10,
       padding: 10,
       overflow: 'hidden'

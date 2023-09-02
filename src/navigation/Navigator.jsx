@@ -8,8 +8,8 @@ import { useSelector } from 'react-redux'
 
 
 const Navigator = () => {
-   //const { idToken } = useSelector((state) => state.userReducer.value)
-   idToken = true
+   const { idToken } = useSelector((state) => state.userReducer.value)
+   //idToken = true
 
    return (
       <SafeAreaView style={styles.container}>

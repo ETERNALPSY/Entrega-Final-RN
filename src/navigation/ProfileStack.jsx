@@ -7,7 +7,7 @@ const Stack = createNativeStackNavigator()
 
 const ProfileStack = () => {
    return (
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{ headerShown: false }} >
          <Stack.Screen name='Profile' component={Profile} />
          <Stack.Screen name='SelectImage' component={SelectImage} />
       </Stack.Navigator>
