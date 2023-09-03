@@ -79,8 +79,8 @@ const styles = StyleSheet.create({
       overflow: 'hidden'
    },
    title: {
-      fontSize: 35,
-      padding: 5,
+      fontSize: 30,
+      paddingHorizontal: 10,
       fontFamily: 'poppins',
       color: colors.white,
       backgroundColor: colors.green,
@@ -89,15 +89,14 @@ const styles = StyleSheet.create({
       overflow: 'hidden',
    },
    price: {
-      fontSize: 25,
-      paddingRight: 5,
+      fontSize: 18,
+      paddingRight: 7,
       fontFamily: 'montserratBold',
       color: colors.black,
       backgroundColor: colors.white,
-      borderRadius: 10,
-      overflow: 'hidden'
    },
    description: {
+      width: '100%',
       fontSize: 21,
       fontFamily: 'poppins',
       backgroundColor: colors.yellow,

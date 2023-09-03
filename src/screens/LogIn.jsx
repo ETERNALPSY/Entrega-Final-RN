@@ -7,11 +7,13 @@ import { colors } from '../global/colors'
 import { useDispatch } from 'react-redux'
 import { useSignInMutation } from '../services/authServices'
 import { setUser } from '../features/user/userSlice'
+import { insertSession } from '../SQLite'
 
 const LogIn = ({ navigation }) => {
 
    const [email, setEmail] = useState('')
    const [password, setPassword] = useState('')
+
    const dispatch = useDispatch()
 
    const [triggerSignIn, resultSignIn] = useSignInMutation()
@@ -24,18 +26,45 @@ const LogIn = ({ navigation }) => {
       })
    }
 
-   useEffect(()=>{
-      try {
-         if (resultSignIn.isSuccess){
-            dispatch(setUser({
-               email: resultSignIn.data.email,
-               idToken: resultSignIn.data.idToken
-            }))
+   useEffect(() => {
+      (async () => {
+         try {
+            if (resultSignIn.isSuccess) {
+               //Insert session in SQLite database
+               // console.log('inserting Session');
+               const response = await insertSession({
+                  email: resultSignIn.data.email,
+                  idToken: resultSignIn.data.idToken,
+                  localId: resultSignIn.data.localId,
+               })
+               //console.log('Session inserted: ');
+               console.log(resultSignIn.data);
+
+               dispatch(setUser({
+                  email: resultSignIn.data.email,
+                  idToken: resultSignIn.data.idToken,
+                  localId: resultSignIn.data.localId,
+                  profileImage: "",
+               }))
+            }
+         } catch (error) {
+            console.log(error.message);
          }
-      } catch (error) {
-         
-      }
-   },[resultSignIn])
+      })()
+   }, [resultSignIn])
+
+   //useEffect(() => {
+   //   try {
+   //      if (resultSignIn.isSuccess) {
+   //         dispatch(setUser({
+   //            email: resultSignIn.data.email,
+   //            idToken: resultSignIn.data.idToken
+   //         }))
+   //      }
+   //   } catch (error) {
+   //
+   //   }
+   //}, [resultSignIn])
 
    const toSignUp = () => {
       navigation.navigate('SignUp')

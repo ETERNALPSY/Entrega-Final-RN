@@ -3,12 +3,22 @@ import React from 'react'
 import defaultProfile from '../../assets/images/defaultProfile.png'
 import { colors } from '../global/colors'
 import GreenButton from '../components/GreenButton'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { signOut } from '../features/user/userSlice'
+import { deleteSession } from '../SQLite'
+import { deleteCart } from '../features/cart/cartSlice'
 
 const Profile = ({navigation}) => {
 
-   const { profileImage } = useSelector(state => state.userReducer.value)
-   
+   const { profileImage, localId } = useSelector(state => state.userReducer.value)
+   const dispatch = useDispatch()
+
+   const logOut =() => {
+      deleteSession(localId)
+      dispatch(signOut())
+      dispatch(deleteCart())
+   }
+
    return (
       <View style={styles.container}>
          {
@@ -28,8 +38,11 @@ const Profile = ({navigation}) => {
          <GreenButton  
          onPress={() => navigation.navigate('SelectImage')}
          title={'Editar Imagen de Perfil'}
-         font={30}
          />
+         <GreenButton  
+            title={'Cerrar sesión'}
+            onPress={logOut}
+         /> 
       </View>
    )
 }

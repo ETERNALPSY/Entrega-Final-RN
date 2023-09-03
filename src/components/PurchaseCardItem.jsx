@@ -1,13 +1,13 @@
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
+import { Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { colors } from '../global/colors'
-import { SimpleLineIcons } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 
-const PurchaseCardItem = ({ img, title, price, quantity, deleteItem }) => {
+const PurchaseCardItem = ({ img, title, price, quantity, deleteItem, plusOne }) => {
 
 
    return (
-      <Pressable  style={styles.container}>
+      <Pressable style={styles.container}>
          <View style={styles.imgWrapper}>
             <Image
                style={styles.img}
@@ -18,13 +18,23 @@ const PurchaseCardItem = ({ img, title, price, quantity, deleteItem }) => {
          <View style={styles.contentWrapper}>
             <View style={styles.wrapper}>
                <Text style={styles.title}>{title}</Text>
-               <Pressable  onPress={()=>deleteItem(title)} style={styles.icon}>
-                  <SimpleLineIcons name="minus" size={30} color="red" />
-               </Pressable>
             </View>
             <View style={styles.wrapper} >
                <Text style={styles.price}>${price}/Kg</Text>
-               <Text style={styles.description}>{quantity}</Text>
+               <View style={styles.quantityWrapper}>
+                  <TouchableOpacity onPress={() => deleteItem(title)}>
+                     {
+                        quantity === 1
+                           ? <Feather name="trash-2" size={24} color="red" />
+                           : <Text style={styles.minPlus}>-</Text>
+                     }
+                  </TouchableOpacity>
+
+                  <Text style={styles.quantity}>{quantity}</Text>
+                  <TouchableOpacity onPress={() => plusOne(title)}>
+                     <Text style={styles.minPlus}>+</Text>
+                  </TouchableOpacity>
+               </View>
             </View>
          </View>
       </Pressable>
@@ -56,15 +66,14 @@ const styles = StyleSheet.create({
    contentWrapper: {
       width: '70%',
       backgroundColor: colors.yellow,
-      gap: 10,
-      padding: 10,
-      borderTopLeftRadius:10,
-      borderBottomLeftRadius:10
+      padding: 7,
+      borderTopLeftRadius: 10,
+      borderBottomLeftRadius: 10
    },
-   wrapper:{
-      flexDirection:'row',
-      justifyContent:'space-between',
-      alignItems:'center'
+   wrapper: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'flex-end'
    },
    title: {
       fontSize: 25,
@@ -77,8 +86,23 @@ const styles = StyleSheet.create({
 
       color: colors.black
    },
-   description: {
-      fontSize: 20,
+   quantityWrapper: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      paddingHorizontal: 10,
+      gap: 25,
+      borderWidth: 2,
+      borderColor: colors.green,
+      borderRadius: 10
+   },
+   quantity: {
+      fontSize: 22,
+      fontFamily: 'montserratLight',
+      color: colors.black
+   },
+   minPlus: {
+      fontSize: 35,
       fontFamily: 'montserratLight',
       color: colors.black
    }

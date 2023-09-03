@@ -35,17 +35,16 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       borderWidth: 1,
       borderColor: colors.yellow,
-      
       backgroundColor: colors.yellow,
-      overflow:'hidden'
+      overflow: 'hidden'
    },
    imgWrapper: {
       width: '40%',
       height: 'auto',
-      padding:0.5,
-      borderTopRightRadius:10,
-      borderBottomRightRadius:10,
-      backgroundColor:colors.white
+      padding: 0.5,
+      borderTopRightRadius: 10,
+      borderBottomRightRadius: 10,
+      backgroundColor: colors.white
    },
    img: {
       flex: 1,

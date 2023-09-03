@@ -5,6 +5,7 @@ export const authApi = createApi({
    reducerPath: 'authApi',
    baseQuery: fetchBaseQuery({ baseUrl: 'https://identitytoolkit.googleapis.com/v1' }),
    endpoints: (builder) => ({
+      
       signUp: builder.mutation({
          query: (auth) => ({
             url: `/accounts:signUp?key=${api_key}`,
@@ -12,6 +13,7 @@ export const authApi = createApi({
             body: auth
          })
       }),
+
       signIn: builder.mutation({
          query: (auth) => ({
             url: `/accounts:signInWithPassword?key=${api_key}`,

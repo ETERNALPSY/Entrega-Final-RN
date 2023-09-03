@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import GreenButton from '../components/GreenButton'
 import { colors } from '../global/colors'
 import { saveImage } from '../features/user/userSlice'
+import { insertProfileImage } from '../SQLite'
 
 
 const SelectImage = ({navigation}) => {

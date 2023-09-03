@@ -31,9 +31,26 @@ export const cartSlice = createSlice({
          )
 
       },
+
+      addOne: (state, action) => {
+
+         state.value.items = state.value.items.map(item => {
+            if (item.name === action.payload) {
+            item.quantity += 1
+            return item
+            }
+            return item
+         })
+
+         state.value.total = state.value.items.reduce(
+            (acc, cur) => acc += cur.price * cur.quantity,
+            0)
+
+      },
+
       deleteToCart: (state, action) => {
 
-         const product = state.value.items.some(item => item.name === action.payload &&  item.quantity > 1)
+         const product = state.value.items.some(item => item.name === action.payload && item.quantity > 1)
 
          if (product) {
             state.value.items = state.value.items.map(item => {
@@ -58,5 +75,5 @@ export const cartSlice = createSlice({
 
 })
 
-export const { addToCart, deleteToCart, deleteCart } = cartSlice.actions
+export const { addToCart, deleteToCart, deleteCart, addOne } = cartSlice.actions
 export default cartSlice.reducer

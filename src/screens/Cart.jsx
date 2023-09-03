@@ -4,14 +4,24 @@ import GreenButton from '../components/GreenButton'
 import { colors } from '../global/colors'
 import PurchaseCardItem from '../components/PurchaseCardItem'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteCart, deleteToCart } from '../features/cart/cartSlice'
+import { addOne, deleteCart, deleteToCart } from '../features/cart/cartSlice'
 import { usePostPurchaseMutation } from '../services/shopServices'
 
 const Cart = () => {
 
    const { items: products, total } = useSelector(state => state.cartReducer.value)
    const [triggerPurchase, result] = usePostPurchaseMutation()
+
    const dispatch = useDispatch()
+
+   const addedProducts = products.reduce(
+      (acc, cur) => acc += cur.quantity,
+      0)
+
+   const plusOne = (title) => {
+      dispatch(addOne(title))
+   }
+
    const deleteItem = (title) => {
       dispatch(deleteToCart(title))
    }
@@ -21,14 +31,13 @@ const Cart = () => {
       dispatch(deleteCart())
    }
 
-   console.log(result)
-
    return (
       <View style={styles.container}>
          <Text style={styles.cartTitle}>Mi lista de compras</Text>
          <View style={styles.wrapper}>
-            <Text style={styles.addedProducts}>10 producto agregados</Text>
-            <TouchableOpacity style={styles.deleteButton}>
+            <Text style={styles.addedProducts}>{addedProducts} productos agregados</Text>
+            <TouchableOpacity style={styles.deleteButton} onPress={() => dispatch(deleteCart())
+            }>
                <Text style={styles.textDeleteButton}>Vaciar Carrito</Text>
             </TouchableOpacity>
          </View>
@@ -41,8 +50,8 @@ const Cart = () => {
                      title={item.name}
                      img={item.images}
                      price={item.price}
-                     description={item.description}
                      quantity={item.quantity}
+                     plusOne={plusOne}
                      deleteItem={deleteItem}
                   />
                )

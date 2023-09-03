@@ -4,9 +4,9 @@ export const userSlice = createSlice({
    name: 'User',
    initialState: {
       value: {
-         name: '',
          email: '',
          idToken: '',
+         localId: "",
          profileImage: ''
       }
    },
@@ -14,14 +14,16 @@ export const userSlice = createSlice({
       setUser: (state, action) => {
          state.value = action.payload
       },
+
       signOut: (state) => {
          state.value = {
-            name: '',
             email: '',
             idToken: '',
+            localId: "",
             profileImage: ''
          }
       },
+
       saveImage: (state, action) => {
          state.value.profileImage = action.payload
       },
