@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TextInput } from 'react-native'
 import React, { useState } from 'react'
 import { colors } from '../global/colors'
 
-const InputArea = ({ label, onChange, isSecure }) => {
+const InputArea = ({ label, onChange, isSecure, error }) => {
 
    const [input, setInput] = useState('')
 
@@ -13,7 +13,7 @@ const InputArea = ({ label, onChange, isSecure }) => {
 
    return (
       <View style={styles.inputWrapper}>
-         <Text style={styles.label}>{label}</Text>
+         <Text style={[styles.label, error && {color:'red'}]}>{error ? error : label}</Text>
          <TextInput
             style={styles.input}
             value={input}
@@ -33,15 +33,15 @@ const styles = StyleSheet.create({
    },
    label: {
       fontSize: 16,
-      fontFamily:'montserratBold'
+      fontFamily: 'montserratBold'
    },
    input: {
       width: '100%',
       borderBottomWidth: 3,
-      borderColor:colors.green,
+      borderColor: colors.green,
       fontSize: 20,
       padding: 10,
-      fontFamily:'montserratBold'
+      fontFamily: 'montserratBold'
    }
 
 })

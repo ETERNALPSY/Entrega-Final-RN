@@ -8,22 +8,39 @@ import { useDispatch } from 'react-redux'
 import { useSignInMutation } from '../services/authServices'
 import { setUser } from '../features/user/userSlice'
 import { insertSession } from '../SQLite'
+import { isAtLeastSixCharacters, isValidEmail } from '../validations/auth'
 
 const LogIn = ({ navigation }) => {
 
    const [email, setEmail] = useState('')
    const [password, setPassword] = useState('')
+   const [errorEmail, setErrorEmail] = useState('')
+   const [errorPassword, setErrorPassword] = useState('')
 
    const dispatch = useDispatch()
 
    const [triggerSignIn, resultSignIn] = useSignInMutation()
 
+
    const onSubmit = () => {
-      triggerSignIn({
-         email,
-         password,
-         returnSecureToken: true,
-      })
+      try {
+         const isValidVariableEmail = isValidEmail(email)
+         const isCorrectPassword = isAtLeastSixCharacters(password)
+
+         if (isValidVariableEmail && isCorrectPassword) {
+            triggerSignIn({
+               email,
+               password,
+               returnSecureToken: true,
+            })
+         }
+         if (!isValidVariableEmail) setErrorEmail('El email no es valido')
+         else setErrorEmail('')
+         if (!isCorrectPassword) setErrorPassword('La contraseña no es valida')
+         else setErrorPassword('')
+      } catch (error) {
+         
+      }
    }
 
    useEffect(() => {
@@ -31,14 +48,11 @@ const LogIn = ({ navigation }) => {
          try {
             if (resultSignIn.isSuccess) {
                //Insert session in SQLite database
-               // console.log('inserting Session');
                const response = await insertSession({
                   email: resultSignIn.data.email,
                   idToken: resultSignIn.data.idToken,
                   localId: resultSignIn.data.localId,
                })
-               //console.log('Session inserted: ');
-               console.log(resultSignIn.data);
 
                dispatch(setUser({
                   email: resultSignIn.data.email,
@@ -48,23 +62,10 @@ const LogIn = ({ navigation }) => {
                }))
             }
          } catch (error) {
-            console.log(error.message);
+
          }
       })()
    }, [resultSignIn])
-
-   //useEffect(() => {
-   //   try {
-   //      if (resultSignIn.isSuccess) {
-   //         dispatch(setUser({
-   //            email: resultSignIn.data.email,
-   //            idToken: resultSignIn.data.idToken
-   //         }))
-   //      }
-   //   } catch (error) {
-   //
-   //   }
-   //}, [resultSignIn])
 
    const toSignUp = () => {
       navigation.navigate('SignUp')
@@ -84,11 +85,13 @@ const LogIn = ({ navigation }) => {
             <InputArea
                label={'Email'}
                onChange={(email) => setEmail(email)}
+               error={errorEmail}
             />
             <InputArea
                label={'Contraseña'}
                onChange={(password) => setPassword(password)}
                isSecure={true}
+               error={errorPassword}
             />
          </View>
          <View style={styles.formWrapper}>

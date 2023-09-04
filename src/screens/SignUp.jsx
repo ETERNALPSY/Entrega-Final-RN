@@ -7,19 +7,23 @@ import { colors } from '../global/colors'
 import { useSignUpMutation } from '../services/authServices'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../features/user/userSlice'
+import { isAtLeastSixCharacters, isValidEmail } from '../validations/auth'
 
 const SignUp = () => {
 
    const [email, setEmail] = useState('')
+   const [errorMail, setErrorMail] = useState('')
    const [password, setPassword] = useState('')
+   const [errorPassword, setErrorPassword] = useState('')
    const [confirmPassword, setConfirmPassword] = useState('')
-   const [triggerSingUp, result] = useSignUpMutation()
+   const [errorConfirmPassword, setErrorConfirmPassword] = useState('')
+
+   const [triggerSignUp, result] = useSignUpMutation()
    const dispatch = useDispatch()
 
    useEffect(() => {
       if (result.isSuccess) {
-         dispatch(
-            setUser({
+         dispatch(setUser({
                email: result.data.email,
                idToken: result.data.idToken
             })
@@ -29,12 +33,24 @@ const SignUp = () => {
 
    const onSubmit = () => {
       try {
-         const request = {
-            email,
-            password,
-            returnSecureToken: true
+         const isValidVariableEmail = isValidEmail(email)
+         const isCorrectPassword = isAtLeastSixCharacters(password)
+         const isRepeatedPasswordCorrect = password === confirmPassword
+
+         if (isValidVariableEmail && isCorrectPassword && isRepeatedPasswordCorrect) {
+            const request = {
+               email,
+               password,
+               returnSecureToken: true
+            }
+            triggerSignUp(request)
          }
-         triggerSingUp(request)
+            if (!isValidVariableEmail) setErrorMail('El email no es valido')
+            else setErrorMail('')
+            if (!isCorrectPassword) setErrorPassword('La contraseña es muy corta')
+            else setErrorPassword('')
+            if (!isRepeatedPasswordCorrect) setErrorConfirmPassword('Las contraseñas no coinciden')
+            else setErrorConfirmPassword('')
       } catch (error) {
          console.log(error)
       }
@@ -53,19 +69,20 @@ const SignUp = () => {
          <View style={styles.formWrapper}>
             <InputArea
                label={'Email'}
-               email={email}
                onChange={setEmail}
+               error={errorMail}
             />
             <InputArea
                label={'Contraseña'}
-               password={password}
                isSecure={true}
                onChange={setPassword}
+               error={errorPassword}
             />
             <InputArea
                label={'Confirmar Contraseña'}
                isSecure={true}
                onChange={setConfirmPassword}
+               error={errorConfirmPassword}
             />
          </View>
          <Text style={styles.subtitle}>Un placer recibirte en nuestra comunidad</Text>

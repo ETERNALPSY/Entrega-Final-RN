@@ -1,7 +1,7 @@
 import { Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { colors } from '../global/colors'
-import { Feather } from '@expo/vector-icons';
+import { Feather, Entypo } from '@expo/vector-icons';
 
 const PurchaseCardItem = ({ img, title, price, quantity, deleteItem, plusOne }) => {
 
@@ -16,9 +16,7 @@ const PurchaseCardItem = ({ img, title, price, quantity, deleteItem, plusOne }) 
             />
          </View>
          <View style={styles.contentWrapper}>
-            <View style={styles.wrapper}>
-               <Text style={styles.title}>{title}</Text>
-            </View>
+            <Text style={styles.title}>{title}</Text>
             <View style={styles.wrapper} >
                <Text style={styles.price}>${price}/Kg</Text>
                <View style={styles.quantityWrapper}>
@@ -26,13 +24,13 @@ const PurchaseCardItem = ({ img, title, price, quantity, deleteItem, plusOne }) 
                      {
                         quantity === 1
                            ? <Feather name="trash-2" size={24} color="red" />
-                           : <Text style={styles.minPlus}>-</Text>
+                           : <Entypo name="minus" size={20} color="black" />
                      }
                   </TouchableOpacity>
 
                   <Text style={styles.quantity}>{quantity}</Text>
                   <TouchableOpacity onPress={() => plusOne(title)}>
-                     <Text style={styles.minPlus}>+</Text>
+                     <Entypo name="plus" size={20} color="black" />
                   </TouchableOpacity>
                </View>
             </View>
@@ -73,36 +71,32 @@ const styles = StyleSheet.create({
    wrapper: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      alignItems: 'flex-end'
+      alignItems: 'center'
    },
    title: {
-      fontSize: 25,
+      fontSize: 26,
       fontFamily: 'poppins',
-      color: colors.black
+      color: colors.black,
    },
    price: {
       fontSize: 18,
       fontFamily: 'montserratBold',
-
-      color: colors.black
+      width: '50%',
+      color: colors.black,
    },
    quantityWrapper: {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
+      width: '50%',
       paddingHorizontal: 10,
-      gap: 25,
+      paddingVertical:2,
       borderWidth: 2,
       borderColor: colors.green,
       borderRadius: 10
    },
    quantity: {
       fontSize: 22,
-      fontFamily: 'montserratLight',
-      color: colors.black
-   },
-   minPlus: {
-      fontSize: 35,
       fontFamily: 'montserratLight',
       color: colors.black
    }

@@ -61,7 +61,7 @@ const Cart = () => {
          />
          <View style={styles.wrapper}>
             <Text style={styles.totalCost}>Costo total:</Text>
-            <Text style={styles.totalPrice}>${total}</Text>
+            <Text style={styles.totalPrice}>${total.toFixed(2)}</Text>
          </View>
          <GreenButton title={'Proceder al pago'} onPress={purchase} />
       </View>
