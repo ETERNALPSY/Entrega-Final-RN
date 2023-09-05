@@ -16,7 +16,7 @@ const AuthStack = () => {
             component={Welcome}
          />
          <Stack.Screen options={{ headerShown: false }} name='LogIn' component={LogIn} />
-         <Stack.Screen name='SignUp' component={SignUp} />
+         <Stack.Screen name='Registro' component={SignUp} />
          <Stack.Screen name='Default' component={TabNavigator} />
       </Stack.Navigator>
    )

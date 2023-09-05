@@ -8,12 +8,12 @@ const Welcome = ({ navigation }) => {
 
    return (
       <View style={styles.container}>
-         <Text style={styles.title}>Déjate llevar por una experiencia culinaria única</Text>
          <Image
             style={styles.img}
             source={principal}
             resizeMode='cover'
          />
+         <Text style={styles.title}>Déjate llevar por una experiencia culinaria única</Text>
          <TouchableOpacity
             onPress={() => navigation.navigate('LogIn')}
             style={styles.button}
@@ -35,9 +35,16 @@ const styles = StyleSheet.create({
       backgroundColor: colors.white
    },
    title: {
-      fontSize: 50,
+      fontSize: 60,
       color: colors.black,
       fontFamily: 'poppins',
+      fontWeight:'bold',
+      textShadowOffset:{
+         width:1,
+         height:1
+      },
+      textShadowColor:colors.white,
+      textShadowRadius:20
    },
    img: {
       width: 750,

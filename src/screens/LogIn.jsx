@@ -39,7 +39,7 @@ const LogIn = ({ navigation }) => {
          if (!isCorrectPassword) setErrorPassword('La contraseña no es valida')
          else setErrorPassword('')
       } catch (error) {
-         
+
       }
    }
 
@@ -68,7 +68,7 @@ const LogIn = ({ navigation }) => {
    }, [resultSignIn])
 
    const toSignUp = () => {
-      navigation.navigate('SignUp')
+      navigation.navigate('Registro')
    }
 
    return (
@@ -84,12 +84,12 @@ const LogIn = ({ navigation }) => {
          <View style={styles.formWrapper}>
             <InputArea
                label={'Email'}
-               onChange={(email) => setEmail(email)}
+               onChange={setEmail}
                error={errorEmail}
             />
             <InputArea
                label={'Contraseña'}
-               onChange={(password) => setPassword(password)}
+               onChange={setPassword}
                isSecure={true}
                error={errorPassword}
             />
