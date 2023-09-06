@@ -20,17 +20,17 @@ const PurchaseCardItem = ({ img, title, price, quantity, deleteItem, plusOne }) 
             <View style={styles.wrapper} >
                <Text style={styles.price}>${price}/Kg</Text>
                <View style={styles.quantityWrapper}>
-                  <TouchableOpacity onPress={() => deleteItem(title)}>
+                  <TouchableOpacity style={styles.minusPlus} onPress={() => deleteItem(title)}>
                      {
                         quantity === 1
-                           ? <Feather name="trash-2" size={24} color="red" />
-                           : <Entypo name="minus" size={20} color="black" />
+                           ? <Feather name="trash-2" size={22} color="red" />
+                           : <Entypo name="minus" size={22} color="black" />
                      }
                   </TouchableOpacity>
 
                   <Text style={styles.quantity}>{quantity}</Text>
-                  <TouchableOpacity onPress={() => plusOne(title)}>
-                     <Entypo name="plus" size={20} color="black" />
+                  <TouchableOpacity style={styles.minusPlus} onPress={() => plusOne(title)}>
+                     <Entypo name="plus" size={22} color="black" />
                   </TouchableOpacity>
                </View>
             </View>
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
       width: '100%',
       flexDirection: 'row',
       backgroundColor: colors.white,
-      borderRadius: 10,
+      borderRadius: 5,
       overflow: 'hidden',
       borderWidth: 1,
       borderColor: colors.yellow
@@ -65,8 +65,8 @@ const styles = StyleSheet.create({
       width: '70%',
       backgroundColor: colors.yellow,
       padding: 7,
-      borderTopLeftRadius: 10,
-      borderBottomLeftRadius: 10
+      borderTopLeftRadius: 5,
+      borderBottomLeftRadius: 5
    },
    wrapper: {
       flexDirection: 'row',
@@ -89,11 +89,15 @@ const styles = StyleSheet.create({
       justifyContent: 'space-between',
       alignItems: 'center',
       width: '50%',
-      paddingHorizontal: 10,
-      paddingVertical:2,
+      paddingVertical: 2,
       borderWidth: 2,
       borderColor: colors.green,
-      borderRadius: 10
+      borderRadius: 5
+   },
+   minusPlus: {
+      alignItems: 'center',
+      width: '34%',
+      height: '100%'
    },
    quantity: {
       fontSize: 22,

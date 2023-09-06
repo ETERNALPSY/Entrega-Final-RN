@@ -1,11 +1,12 @@
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { FlatList, Image, Pressable, StyleSheet, Text, View } from 'react-native'
+import React from 'react'
 import GreenButton from '../components/GreenButton'
 import { colors } from '../global/colors'
 import PurchaseCardItem from '../components/PurchaseCardItem'
 import { useDispatch, useSelector } from 'react-redux'
 import { addOne, deleteCart, deleteToCart } from '../features/cart/cartSlice'
 import { usePostPurchaseMutation } from '../services/shopServices'
+import cartEmpty from '../../assets/images/cartEmpty.png'
 
 const Cart = () => {
 
@@ -33,37 +34,51 @@ const Cart = () => {
 
    return (
       <View style={styles.container}>
-         <Text style={styles.cartTitle}>Mi lista de compras</Text>
-         <View style={styles.wrapper}>
-            <Text style={styles.addedProducts}>{addedProducts} productos agregados</Text>
-            <TouchableOpacity style={styles.deleteButton} onPress={() => dispatch(deleteCart())
-            }>
-               <Text style={styles.textDeleteButton}>Vaciar Carrito</Text>
-            </TouchableOpacity>
-         </View>
-         <FlatList
-            data={products}
-            keyExtractor={item => item.id}
-            renderItem={({ item }) => {
-               return (
-                  <PurchaseCardItem
-                     title={item.name}
-                     img={item.images}
-                     price={item.price}
-                     quantity={item.quantity}
-                     plusOne={plusOne}
-                     deleteItem={deleteItem}
+         {
+            products.length === 0 ?
+               <View style={styles.emptyCartWrapper}>
+                  <Text style={styles.emptyCartTitle}>Tu carrito esta vació</Text>
+                  <Image
+                     style={styles.emptyCartImg}
+                     source={cartEmpty}
+                     resizeMode='contain'
                   />
-               )
-            }}
-            contentContainerStyle={{ gap: 10 }}
-            showsVerticalScrollIndicator={false}
-         />
-         <View style={styles.wrapper}>
-            <Text style={styles.totalCost}>Costo total:</Text>
-            <Text style={styles.totalPrice}>${total.toFixed(2)}</Text>
-         </View>
-         <GreenButton title={'Proceder al pago'} onPress={purchase} />
+                  <Text style={styles.emptyCartText}>¡Explora nuestro catalogo!</Text>
+               </View>
+               :
+               <>
+                  <Text style={styles.cartTitle}>Mi carrito</Text>
+                  <View style={styles.wrapper}>
+                     <Text style={styles.addedProducts}>{addedProducts} productos agregados</Text>
+                     <Pressable style={styles.deleteButton} onPress={() => dispatch(deleteCart())}>
+                        <Text style={styles.textDeleteButton}>Vaciar Carrito</Text>
+                     </Pressable>
+                  </View>
+                  <FlatList
+                     data={products}
+                     keyExtractor={item => item.id}
+                     renderItem={({ item }) => {
+                        return (
+                           <PurchaseCardItem
+                              title={item.name}
+                              img={item.images}
+                              price={item.price}
+                              quantity={item.quantity}
+                              plusOne={plusOne}
+                              deleteItem={deleteItem}
+                           />
+                        )
+                     }}
+                     contentContainerStyle={{ gap: 10 }}
+                     showsVerticalScrollIndicator={false}
+                  />
+                  <View style={styles.wrapper}>
+                     <Text style={styles.totalCost}>Costo total:</Text>
+                     <Text style={styles.totalPrice}>${total.toFixed(2)}</Text>
+                  </View>
+                  <GreenButton title={'Proceder al pago'} onPress={purchase} />
+               </>
+         }
       </View>
    )
 }
@@ -76,6 +91,24 @@ const styles = StyleSheet.create({
       padding: 10,
       backgroundColor: colors.white,
       gap: 10
+   },
+   emptyCartWrapper: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center'
+   },
+   emptyCartTitle: {
+      color: colors.black,
+      fontSize: 30,
+      fontFamily: 'montserratBold'
+   },
+   emptyCartImg: {
+      width:'100%'
+   },
+   emptyCartText:{
+      color: colors.black,
+      fontSize: 20,
+      fontFamily: 'montserratLight'
    },
    cartTitle: {
       fontSize: 35,
