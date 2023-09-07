@@ -2,13 +2,14 @@ import { StyleSheet, Text, View, TextInput } from 'react-native'
 import React, { useState } from 'react'
 import { colors } from '../global/colors'
 
-const InputArea = ({ label, onChange, isSecure, error }) => {
+const InputArea = ({ label, onChange, isSecure, error, setError }) => {
 
    const [input, setInput] = useState('')
 
    const onChangeText = (text) => {
       setInput(text)
       onChange(text)
+      setError('')
    }
 
    return (

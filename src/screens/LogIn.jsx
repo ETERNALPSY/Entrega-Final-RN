@@ -86,12 +86,14 @@ const LogIn = ({ navigation }) => {
                label={'Email'}
                onChange={setEmail}
                error={errorEmail}
+               setError={setErrorEmail}
             />
             <InputArea
                label={'Contraseña'}
                onChange={setPassword}
                isSecure={true}
                error={errorPassword}
+               setError={setErrorPassword}
             />
          </View>
          <View style={styles.formWrapper}>

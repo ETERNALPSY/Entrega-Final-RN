@@ -7,8 +7,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getSession } from '../SQLite'
 import { setUser } from '../features/user/userSlice'
 
-
-
 const Navigator = () => {
    const { idToken } = useSelector((state) => state.userReducer.value)
 

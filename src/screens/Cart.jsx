@@ -6,7 +6,6 @@ import PurchaseCardItem from '../components/PurchaseCardItem'
 import { useDispatch, useSelector } from 'react-redux'
 import { addOne, deleteCart, deleteToCart } from '../features/cart/cartSlice'
 import { usePostPurchaseMutation } from '../services/shopServices'
-import cartEmpty from '../../assets/images/cartEmpty.png'
 
 const Cart = () => {
 
@@ -40,7 +39,7 @@ const Cart = () => {
                   <Text style={styles.emptyCartTitle}>Tu carrito esta vació</Text>
                   <Image
                      style={styles.emptyCartImg}
-                     source={cartEmpty}
+                     source={require('../../assets/images/cartEmpty.png')}
                      resizeMode='contain'
                   />
                   <Text style={styles.emptyCartText}>¡Explora nuestro catalogo!</Text>

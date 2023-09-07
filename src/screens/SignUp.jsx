@@ -71,18 +71,21 @@ const SignUp = () => {
                label={'Email'}
                onChange={setEmail}
                error={errorMail}
+               setError={setErrorMail}
             />
             <InputArea
                label={'Contraseña'}
                isSecure={true}
                onChange={setPassword}
                error={errorPassword}
+               setError={setErrorPassword}
             />
             <InputArea
                label={'Confirmar Contraseña'}
                isSecure={true}
                onChange={setConfirmPassword}
                error={errorConfirmPassword}
+               setError={setErrorConfirmPassword}
             />
          </View>
          <Text style={styles.subtitle}>Un placer recibirte en nuestra comunidad</Text>

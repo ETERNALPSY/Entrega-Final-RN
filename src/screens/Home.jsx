@@ -1,4 +1,4 @@
-import { FlatList, Keyboard, StyleSheet, View } from 'react-native'
+import { FlatList, StyleSheet, View, Text} from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { colors } from '../global/colors'
 import Search from '../components/Search'
