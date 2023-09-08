@@ -17,13 +17,20 @@ const Search = ({ onPress }) => {
             onChangeText={target => {
                setInput(target)
             }}
-            
+            returnKeyType='search'
+            onKeyPress={({ nativeEvent: { key: keyValue} }) => {
+               console.log(keyValue)
+               Keyboard.isVisible(true)
+               if (keyValue === 'ENTER'){
+                  onPress(input.trim())
+                  console.log('You must have pressed Enter ')
+               }
+            }}
          />
          <TouchableOpacity
             style={styles.button}
             onPress={() => {
                onPress(input.trim())
-               Keyboard.dismiss()
             }}
          >
             <Octicons name="search" size={27} color={colors.yellow} />
@@ -51,6 +58,6 @@ const styles = StyleSheet.create({
       fontFamily: 'montserratBold'
    },
    button: {
-      width: '10%'
+      width: '10%',
    }
 })

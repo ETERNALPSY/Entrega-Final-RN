@@ -26,7 +26,7 @@ const Main = ({ navigation }) => {
                <Text style={styles.cardTitle}>Aquí encontrarás todo lo que necesitas</Text>
 
                <GreenButton
-                  title={'Explorar Opciones Gourmet'}
+                  title={'Explorar Menu'}
                   onPress={() => navigation.navigate('Home')}
                />
             </View>
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
    },
    imgWrapper: {
       width: '100%',
-      height: 300,
+      height: 250,
       justifyContent: 'center',
       alignItems: 'center',
    },
