@@ -11,8 +11,9 @@ const ShopStack = () => {
    return (
       <Stack.Navigator
          screenOptions={({ route, navigation }) => ({
-            header: () => {
-               return <Header route={route} navigation={navigation} />;
+            header: () =>  {
+               
+               return navigation.canGoBack() && <Header route={route} navigation={navigation} />;
             },
          })}
       >

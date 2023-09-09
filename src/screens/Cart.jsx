@@ -15,8 +15,7 @@ const Cart = () => {
    const dispatch = useDispatch()
 
    const addedProducts = products.reduce(
-      (acc, cur) => acc += cur.quantity,
-      0)
+      (acc, cur) => acc += cur.quantity,0)
 
    const plusOne = (title) => {
       dispatch(addOne(title))

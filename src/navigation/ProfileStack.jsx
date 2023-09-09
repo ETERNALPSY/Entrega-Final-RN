@@ -11,7 +11,7 @@ const ProfileStack = () => {
       <Stack.Navigator
          screenOptions={({ route, navigation }) => ({
             header: () => {
-               return <Header route={route} navigation={navigation} />;
+               return navigation.canGoBack() && <Header route={route} navigation={navigation} />;
             },
          })}
       >

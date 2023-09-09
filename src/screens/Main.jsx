@@ -8,7 +8,7 @@ const Main = ({ navigation }) => {
 
 
    return (
-      <ScrollView style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
          <View style={styles.contentWrapper}>
             <Image
                source={Logo}
@@ -17,21 +17,19 @@ const Main = ({ navigation }) => {
             <Text style={styles.description}>Encuentra los ingredientes perfectos para tus creaciones culinarias y disfruta de productos frescos y de alta calidad.</Text>
             <View style={styles.cardWrapper}>
                <View style={styles.imgWrapper}>
+                  <Text style={styles.cardTitle}>Aquí encontrarás todo lo que necesitas</Text>
                   <Image
                      source={require('../../assets/images/mainProducts.png')}
                      style={styles.img}
                      resizeMode='contain'
                   />
                </View>
-               <Text style={styles.cardTitle}>Aquí encontrarás todo lo que necesitas</Text>
-
                <GreenButton
                   title={'Explorar Menu'}
                   onPress={() => navigation.navigate('Home')}
                />
             </View>
          </View>
-
       </ScrollView>
    )
 }
@@ -42,13 +40,13 @@ const styles = StyleSheet.create({
    container: {
       backgroundColor: colors.white,
    },
-   contentWrapper:{
-      flex:1,
+   contentWrapper: {
+      flex: 1,
       justifyContent: 'space-between',
-      alignItems:'center',
-      gap:10,
-      paddingHorizontal:10,
-      paddingBottom:10
+      alignItems: 'center',
+      gap: 10,
+      paddingHorizontal: 10,
+      paddingBottom: 10
    },
    description: {
       fontFamily: 'montserratLight',
@@ -63,14 +61,14 @@ const styles = StyleSheet.create({
       borderRadius: 10,
    },
    cardTitle: {
-      fontSize: 20,
+      fontSize: 30,
       textAlign: 'center',
       fontFamily: 'poppins',
       fontWeight: 'bold',
    },
    imgWrapper: {
       width: '100%',
-      height: 250,
+      height: 300,
       justifyContent: 'center',
       alignItems: 'center',
    },

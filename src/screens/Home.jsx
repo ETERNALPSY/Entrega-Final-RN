@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, View, Text} from 'react-native'
+import { FlatList, StyleSheet, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { colors } from '../global/colors'
 import Search from '../components/Search'
@@ -12,8 +12,8 @@ const Home = ({ navigation }) => {
    const [products, setProducts] = useState(undefined)
 
    const onSearch = (word) => {
-      const searched = arrayData && arrayData.filter(item => 
-         item.name.toLowerCase().includes(word.toLowerCase()) || item.category.toLowerCase().includes(word.toLowerCase())
+      const searched = arrayData && arrayData.filter(item =>
+         item.name.toLowerCase().includes(word.toLowerCase()) 
       )
       setProducts(searched)
    }

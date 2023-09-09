@@ -1,7 +1,8 @@
 import { StyleSheet, TextInput, TouchableOpacity, View, Keyboard } from 'react-native'
 import React, { useState } from 'react'
-import { Octicons } from '@expo/vector-icons';
-import { colors } from '../global/colors';
+import { Octicons } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons'
+import { colors } from '../global/colors'
 
 const Search = ({ onPress }) => {
 
@@ -17,20 +18,24 @@ const Search = ({ onPress }) => {
             onChangeText={target => {
                setInput(target)
             }}
-            returnKeyType='search'
-            onKeyPress={({ nativeEvent: { key: keyValue} }) => {
-               console.log(keyValue)
-               Keyboard.isVisible(true)
-               if (keyValue === 'ENTER'){
-                  onPress(input.trim())
-                  console.log('You must have pressed Enter ')
-               }
-            }}
          />
+         {
+            input &&
+            <TouchableOpacity
+               style={styles.searchButton}
+               onPress={() => {
+                  setInput('')
+                  onPress('')
+               }}
+            >
+               <Ionicons name="close" size={27} color="gray" />
+            </TouchableOpacity>
+         }
          <TouchableOpacity
-            style={styles.button}
+            style={styles.searchButton}
             onPress={() => {
                onPress(input.trim())
+               Keyboard.dismiss()
             }}
          >
             <Octicons name="search" size={27} color={colors.yellow} />
@@ -51,13 +56,14 @@ const styles = StyleSheet.create({
       borderRadius: 10
    },
    input: {
-      width: '90%',
+      width: '80%',
       borderRadius: 5,
-      padding: 5,
+      paddingVertical:5,
+      paddingLeft: 10,
       fontSize: 20,
       fontFamily: 'montserratBold'
    },
-   button: {
+   searchButton: {
       width: '10%',
    }
 })
