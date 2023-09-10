@@ -15,7 +15,7 @@ const Cart = () => {
    const dispatch = useDispatch()
 
    const addedProducts = products.reduce(
-      (acc, cur) => acc += cur.quantity,0)
+      (acc, cur) => acc += cur.quantity, 0)
 
    const plusOne = (title) => {
       dispatch(addOne(title))
@@ -25,8 +25,10 @@ const Cart = () => {
       dispatch(deleteToCart(title))
    }
 
+   //envía la compra con la fecha exacta (timestamp)
    const purchase = () => {
-      triggerPurchase({ items: products, total })
+      const datePurchase = Date.now()
+      triggerPurchase({ items: products, total, datePurchase })
       dispatch(deleteCart())
    }
 
@@ -72,7 +74,7 @@ const Cart = () => {
                   />
                   <View style={styles.wrapper}>
                      <Text style={styles.totalCost}>Costo total:</Text>
-                     <Text style={styles.totalPrice}>${total.toFixed(2)}</Text>
+                     <Text style={styles.totalPrice}>${total}</Text>
                   </View>
                   <GreenButton title={'Proceder al pago'} onPress={purchase} />
                </>
@@ -86,7 +88,8 @@ export default Cart
 const styles = StyleSheet.create({
    container: {
       flex: 1,
-      padding: 10,
+      paddingHorizontal: 10,
+      paddingBottom:10,
       backgroundColor: colors.white,
       gap: 10
    },
@@ -101,9 +104,9 @@ const styles = StyleSheet.create({
       fontFamily: 'montserratBold'
    },
    emptyCartImg: {
-      width:'100%'
+      width: '100%'
    },
-   emptyCartText:{
+   emptyCartText: {
       color: colors.black,
       fontSize: 20,
       fontFamily: 'montserratLight'

@@ -26,9 +26,7 @@ export const cartSlice = createSlice({
          } else state.value.items.unshift(action.payload)
 
          state.value.total = state.value.items.reduce(
-            (acc, currentItem) => acc += currentItem.price * currentItem.quantity,
-            0
-         )
+            (acc, currentItem) => acc += currentItem.price * currentItem.quantity, 0).toFixed(2)
 
       },
 
@@ -36,23 +34,22 @@ export const cartSlice = createSlice({
 
          state.value.items = state.value.items.map(item => {
             if (item.name === action.payload) {
-            item.quantity += 1
-            return item
+               item.quantity += 1
+               return item
             }
             return item
          })
 
          state.value.total = state.value.items.reduce(
-            (acc, cur) => acc += cur.price * cur.quantity,
-            0)
+            (acc, cur) => acc += cur.price * cur.quantity, 0).toFixed(2)
 
       },
 
       deleteToCart: (state, action) => {
 
-         const product = state.value.items.some(item => item.name === action.payload && item.quantity > 1)
+         const oneLess = state.value.items.some(item => item.name === action.payload && item.quantity > 1)
 
-         if (product) {
+         if (oneLess) {
             state.value.items = state.value.items.map(item => {
                if (item.name === action.payload) {
                   item.quantity -= 1
@@ -63,9 +60,7 @@ export const cartSlice = createSlice({
          } else state.value.items = state.value.items.filter(item => item.name !== action.payload)
 
          state.value.total = state.value.items.reduce(
-            (acc, cur) => acc += cur.price * cur.quantity,
-            0
-         )
+            (acc, cur) => acc += cur.price * cur.quantity, 0).toFixed(2)
       },
       deleteCart: (state, action) => {
          state.value.items = []

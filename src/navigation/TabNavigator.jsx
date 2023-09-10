@@ -1,12 +1,13 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 //icons
-import { Octicons, FontAwesome5, MaterialIcons, Ionicons  } from '@expo/vector-icons';
+import { Octicons, FontAwesome5, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { colors } from '../global/colors';
 import ProfileStack from './ProfileStack';
 import ShopStack from './ShopStack';
 import CartStack from './CartStack';
 import { StyleSheet } from 'react-native';
+import Purchases from '../screens/Purchases';
 
 const Tab = createBottomTabNavigator()
 
@@ -37,6 +38,17 @@ const TabNavigator = () => {
                tabBarIcon: ({ focused }) => {
                   return (
                      <Ionicons name="md-cart-outline" size={34} color={focused ? colors.green : colors.yellow} />
+                  )
+               }
+            }}
+         />
+         <Tab.Screen
+            name='Compras'
+            component={Purchases}
+            options={{
+               tabBarIcon: ({ focused }) => {
+                  return (
+                     <MaterialCommunityIcons name="barcode-scan" size={30} color={focused ? colors.green : colors.yellow} />
                   )
                }
             }}
