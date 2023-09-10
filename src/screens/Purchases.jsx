@@ -6,11 +6,11 @@ import PurchaseCard from '../components/PurchaseCard'
 
 const Purchases = () => {
 
-   const { data: arrayData, error } = useGetPurchasesQuery()
+   const { data: arrayData } = useGetPurchasesQuery()
    return (
 
       <View style={styles.container}>
-         <Text style={styles.title}>Mis Compras</Text>
+         <Text style={styles.title}>Mis compras</Text>
          <FlatList
             data={arrayData}
             keyExtractor={item => item.datePurchase}
@@ -27,6 +27,7 @@ const Purchases = () => {
                gap: 10,
                paddingBottom: 10
             }}
+            showsVerticalScrollIndicator={false}
          />
       </View>
    )
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: colors.white,
       paddingHorizontal: 10,
+      gap: 10
    },
    title: {
       fontSize: 35,

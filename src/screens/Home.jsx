@@ -32,7 +32,10 @@ const Home = ({ navigation }) => {
             keyExtractor={item => item.id}
             renderItem={({ item }) => <SmallCardItem item={item} navigation={navigation} />}
             style={styles.flatList}
-            contentContainerStyle={{ gap: 10 }}
+            contentContainerStyle={{ 
+               gap: 10,
+               paddingBottom:10
+            }}
             showsVerticalScrollIndicator={false}
          />
       </View>

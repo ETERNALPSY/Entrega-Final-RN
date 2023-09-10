@@ -5,14 +5,16 @@ import { colors } from '../global/colors'
 const PurchaseDetailCard = ({ item }) => {
    return (
       <View style={styles.container}>
-         <Image
-            width={35}
-            height={35}
-            source={{ uri: item.images }}
-            resizeMode='contain'
-         />
-         <Text>{item.name} </Text>
-         <Text>({item.quantity})</Text>
+         <View style={styles.imgTitleWrapper}>
+            <Image
+               width={60}
+               height={60}
+               source={{ uri: item.images }}
+               resizeMode='contain'
+            />
+            <Text style={styles.title}>{item.name} </Text>
+         </View>
+         <Text style={styles.title}>{item.quantity}kg</Text>
       </View>
    )
 }
@@ -21,11 +23,23 @@ export default PurchaseDetailCard
 
 const styles = StyleSheet.create({
    container: {
-      flexDirection:'row',
-      alignItems:'center',
+      minWidth: '50%',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
       backgroundColor: colors.yellow,
       borderTopWidth: 1,
-      padding: 2,
+      paddingHorizontal: 10,
       borderColor: colors.green
+   },
+   imgTitleWrapper: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: 10
+   },
+   title: {
+      fontSize: 25,
+      fontFamily: 'poppins'
    }
 })
