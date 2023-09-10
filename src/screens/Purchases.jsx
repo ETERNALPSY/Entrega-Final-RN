@@ -6,9 +6,9 @@ import PurchaseCard from '../components/PurchaseCard'
 
 const Purchases = () => {
 
-   const { data: arrayData } = useGetPurchasesQuery()
-
+   const { data: arrayData, error } = useGetPurchasesQuery()
    return (
+
       <View style={styles.container}>
          <Text style={styles.title}>Mis Compras</Text>
          <FlatList
@@ -25,7 +25,7 @@ const Purchases = () => {
             }}
             contentContainerStyle={{
                gap: 10,
-               paddingBottom:10
+               paddingBottom: 10
             }}
          />
       </View>
