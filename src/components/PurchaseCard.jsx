@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
    cardHeader: {
       flexDirection: 'row',
       justifyContent: 'space-between',
+      alignItems: 'center',
       padding: 10
    },
    date:{

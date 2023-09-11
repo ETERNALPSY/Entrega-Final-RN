@@ -7,21 +7,11 @@ import PurchaseCard from '../components/PurchaseCard'
 const Purchases = () => {
 
    const { data: arrayData } = useGetPurchasesQuery()
-   return (
 
+   return (
       <View style={styles.container}>
          {
-            arrayData ?
-               <>
-                  <Text style={styles.emptyTitle}>Únete al Mundo Culinario</Text>
-                  <Image
-                  style={styles.emptyImg}
-                     source={require('../../assets/images/emptyBag.png')}
-                     resizeMode='contain'
-                  />
-                  <Text style={styles.emptyText}>¿Listo para desatar tu creatividad gastronómica?</Text>
-               </>
-               :
+            arrayData && arrayData.length !== 0 ?
                <>
                   <Text style={styles.title}>Mis compras</Text>
                   <FlatList
@@ -43,6 +33,16 @@ const Purchases = () => {
                      showsVerticalScrollIndicator={false}
                   />
                </>
+               :
+               <>
+                  <Text style={styles.emptyTitle}>Únete al Mundo Culinario</Text>
+                  <Image
+                     style={styles.emptyImg}
+                     source={require('../../assets/images/emptyBag.png')}
+                     resizeMode='contain'
+                  />
+                  <Text style={styles.emptyText}>¿Listo para desatar tu creatividad gastronómica?</Text>
+               </>
          }
       </View>
    )
@@ -63,18 +63,18 @@ const styles = StyleSheet.create({
       fontFamily: 'poppins',
       fontWeight: 'bold'
    },
-   emptyImg:{
-      alignSelf:'center',
-      width:'80%',
+   emptyImg: {
+      alignSelf: 'center',
+      width: '80%',
    },
-   emptyTitle:{
-      textAlign:'center',
+   emptyTitle: {
+      textAlign: 'center',
       fontSize: 35,
       fontFamily: 'poppins',
       fontWeight: 'bold'
    },
-   emptyText:{
-      textAlign:'center',
+   emptyText: {
+      textAlign: 'center',
       color: colors.black,
       fontSize: 20,
       fontFamily: 'montserratLight'
